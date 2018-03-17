@@ -11,12 +11,18 @@ import android.widget.TextView
 import com.udacity.notepad.R
 import com.udacity.notepad.data.DataStore
 import com.udacity.notepad.data.Note
+import kotlinx.android.synthetic.main.activity_create.*
 
 import java.util.Date
 
 class CreateActivity : AppCompatActivity() {
 
-    private var editText: TextView? = null
+    companion object {
+
+        operator fun get(context: Context): Intent {
+            return Intent(context, CreateActivity::class.java)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,15 +54,8 @@ class CreateActivity : AppCompatActivity() {
 
     private fun updateNote(): Note {
         val note = Note()
-        note.text = editText!!.text.toString()
+        note.text = edit_text.text.toString()
         note.updatedAt = Date()
         return note
-    }
-
-    companion object {
-
-        operator fun get(context: Context): Intent {
-            return Intent(context, CreateActivity::class.java)
-        }
     }
 }
